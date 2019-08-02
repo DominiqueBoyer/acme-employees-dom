@@ -1,8 +1,63 @@
 <html>
   <head>
+    <style>
+      #employee-list {
+        display: flex;
+        flex: wrap;
+      }
+      .people{
+        border: solid 1px black;
+        height: 5rem;
+        width: 5rem;
+      }
+      .favorite{
+        background-color: red;
+        height: 5rem;
+        width: 5rem;
+      }
 
+    </style>
   </head>
   <body>
-    
+    <h1>Acme Employees DOM</h1>
+
+    <p>Choose your three Favorite employees.</p>
+
+    <div id ='employee-list'>
+
+    </div>
+
+    <script>
+      const employees = [
+        { id: 1, name: 'moe'},
+        { id: 2, name: 'larry'},
+        { id: 4, name: 'shep'},
+        { id: 3, name: 'curly'},
+        { id: 5, name: 'groucho'},
+        { id: 6, name: 'harpo'},
+        { id: 8, name: 'shep Jr.'},
+        { id: 99, name: 'lucy'}
+      ];
+
+      const employeeList =document.querySelector('#employee-list');
+      const render = ()=>{
+              const html = employees.map(person => {
+                return `<div id='people' class='people'>${person.name}</div>`
+              }).join('');
+              employeeList.innerHTML = html
+            }
+
+      render();
+
+      employeeList.addEventListener('click', (ev)=>{
+        if(ev.target.className==='people'){
+          ev.target.className = 'favorite';
+        }
+        else{
+          ev.target.className = 'people';
+        }
+        console.log(employeeList)
+      })
+    </script>
   </body>
 </html>
