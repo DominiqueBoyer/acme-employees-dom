@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <style>
+      body{
+        padding: 1rem;
+      }
+      #favoriteBox{
+        border: solid 1px black;
+        background-color: palegoldenrod;
+        height: 1rem;
+        width: 1rem;
+      }
+      #color{
+        display: flex;
+
+      }
+      #employee-list div{
+        border: solid 1px black;
+        width: calc(100%/3 - 3rem);
+
+      }
+      #employee-list{
+        display: flex;
+        flex-wrap: wrap;
+
+      }
+      .favorite{
+        background-color: palegoldenrod;
+      }
+      .people{
+        background-color: powderblue
+
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Acme Employees DOM</h1>
+
+    <p>Choose your three favorite employees.</p>
+
+    <div id='container'>
+      <div id='employee-list'>
+
+      </div>
+    </div>
+<br>
+    <div id='color'>
+      Favorite:
+        <div id='favoriteBox'>
+        </div>
+    </div>
+    <script>
+      const employees = [
+        { id: 1, name: 'moe'},
+        { id: 2, name: 'larry'},
+        { id: 4, name: 'shep'},
+        { id: 3, name: 'curly'},
+        { id: 5, name: 'groucho'},
+        { id: 6, name: 'harpo'},
+        { id: 8, name: 'shep Jr.'},
+        { id: 99, name: 'lucy'}
+      ];
+      const employeeList = document.querySelector('#employee-list');
+
+      const render = ()=>{
+        const html = employees.map(person => {
+          return `<div class='people'>${person.name}</div>`
+        }).join('');
+        employeeList.innerHTML = html;
+      }
+      render();
+
+      let favorites = [];
+
+      employeeList.addEventListener('click', (ev)=>{
+
+        if(ev.target.className==='people'){
+          if(favorites.length===3){
+            alert('There is a max of 3 favorites. Sorry.')
+          }
+          else{
+          ev.target.className = 'favorite';
+          favorites.push(ev.target.innerHTML)
+        }
+        }
+        else{
+          ev.target.className = 'people';
+          favorites =favorites.filter(person=> person!==ev.target.innerHTML);
+        }
+        console.log(favorites);
+        console.log(ev.target.innerHTML)
+      });
+
+
+    </script>
+  </body>
+</html>
